@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /login.php
+Disallow: /register
+Disallow: /vendor
+Disallow: /compare
+Disallow: /switch-finder
+Allow: /assets/
+Allow: /build/
+Allow: /uploads/
+
+Sitemap: https://networkswitcheskenya.co.ke/sitemap.xml
