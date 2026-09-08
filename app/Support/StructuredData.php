@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\HomepageContent;
+use App\Models\Page;
 use App\Models\Product;
 
 class StructuredData
@@ -82,6 +83,75 @@ class StructuredData
                     'text' => $item['answer'],
                 ],
             ], $items),
+        ];
+    }
+
+    /**
+     * BlogPosting schema for blog articles. Uses real database values only.
+     */
+    public static function article(Page $post, string $canonicalUrl, string $description, ?string $imageUrl = null): array
+    {
+        $publisherName = config('business.name', config('app.name', 'Network Switches Kenya'));
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            'headline' => SeoMetadata::pageTitle($post),
+            'description' => $description,
+            'url' => $canonicalUrl,
+            'mainEntityOfPage' => $canonicalUrl,
+            'author' => [
+                '@type' => 'Organization',
+                'name' => $publisherName,
+            ],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => $publisherName,
+                'url' => CanonicalUrl::normalize('/'),
+            ],
+        ];
+
+        if ($post->created_at) {
+            $schema['datePublished'] = $post->created_at->toIso8601String();
+        }
+        if ($post->updated_at) {
+            $schema['dateModified'] = $post->updated_at->toIso8601String();
+        }
+        if ($imageUrl !== null && $imageUrl !== '') {
+            $schema['image'] = CanonicalUrl::absoluteAsset($imageUrl);
+        }
+
+        return $schema;
+    }
+
+    /**
+     * CollectionPage + ItemList schema for curated category landing pages.
+     *
+     * @param  array<int, array{name: string, url: string}>  $items
+     */
+    public static function collectionPage(string $name, string $description, string $canonicalUrl, array $items): array
+    {
+        $itemListElement = [];
+        foreach (array_values($items) as $index => $item) {
+            $itemListElement[] = [
+                '@type' => 'ListItem',
+                'position' => $index + 1,
+                'name' => $item['name'],
+                'url' => $item['url'],
+            ];
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'CollectionPage',
+            'name' => $name,
+            'description' => $description,
+            'url' => $canonicalUrl,
+            'mainEntity' => [
+                '@type' => 'ItemList',
+                'numberOfItems' => count($itemListElement),
+                'itemListElement' => $itemListElement,
+            ],
         ];
     }
 

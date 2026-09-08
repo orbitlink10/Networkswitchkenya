@@ -14,6 +14,7 @@
 @section('canonical_url', $canonicalUrl)
 @section('og_title', 'Compare Network Switches')
 @section('og_description', $description)
+@section('robots', 'noindex,follow')
 
 @push('head')
     <script type="application/ld+json">@json($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>

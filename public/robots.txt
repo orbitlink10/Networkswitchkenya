@@ -10,5 +10,6 @@ Disallow: /switch-finder
 Allow: /assets/
 Allow: /build/
 Allow: /uploads/
+Allow: /images/
 
-Sitemap: https://networkswitcheskenya.co.ke/sitemap.xml
+Sitemap: https://networkswitchkenya.co.ke/sitemap.xml

@@ -21,6 +21,20 @@
 
     $faqSchema = ($faqItems !== []) ? \App\Support\StructuredData::faq($faqItems) : null;
 
+    $collectionSchema = null;
+    if (! $isHub && $products && $products->total() > 0) {
+        $collectionItems = $products->map(fn ($p) => [
+            'name' => \App\Support\ProductSeo::displayName($p),
+            'url' => \App\Support\CanonicalUrl::route('product.show', $p),
+        ])->all();
+        $collectionSchema = \App\Support\StructuredData::collectionPage(
+            $currentCategory->name,
+            $categoryDescription,
+            $canonicalUrl,
+            $collectionItems
+        );
+    }
+
     $currentFilters = $filters;
     $brandOptions = \App\Support\SwitchCatalog::brands();
     $portOptions = \App\Support\SwitchCatalog::ports();
@@ -55,6 +69,11 @@
 @if($faqSchema)
     @push('head')
         <script type="application/ld+json">@json($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
+    @endpush
+@endif
+@if($collectionSchema)
+    @push('head')
+        <script type="application/ld+json">@json($collectionSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @endpush
 @endif
 

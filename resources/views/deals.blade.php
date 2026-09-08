@@ -2,7 +2,9 @@
 
 @php
     $productImageFallback = \App\Support\ProductImageCatalog::placeholderUrl();
-    $canonicalUrl = \App\Support\CanonicalUrl::route('deals');
+    $currentPage = $products->currentPage();
+    $canonicalQuery = $currentPage > 1 ? ['page' => $currentPage] : [];
+    $canonicalUrl = \App\Support\CanonicalUrl::route('deals', [], $canonicalQuery);
 @endphp
 
 @section('title', $title)

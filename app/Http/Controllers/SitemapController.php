@@ -21,11 +21,6 @@ class SitemapController extends Controller
                 'priority' => '1.0',
             ],
             [
-                'loc' => CanonicalUrl::route('finder'),
-                'lastmod' => null,
-                'priority' => '0.6',
-            ],
-            [
                 'loc' => CanonicalUrl::route('deals'),
                 'lastmod' => null,
                 'priority' => '0.6',

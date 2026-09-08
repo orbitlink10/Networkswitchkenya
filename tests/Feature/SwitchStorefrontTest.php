@@ -102,6 +102,34 @@ class SwitchStorefrontTest extends TestCase
         $this->get('/blog')->assertOk();
     }
 
+    public function test_blog_post_renders_with_article_schema(): void
+    {
+        $post = \App\Models\Page::where('type', 'post')->first();
+        $this->assertNotNull($post);
+
+        $this->get(route('blog.show', ['slug' => $post->slug]))
+            ->assertOk()
+            ->assertSee('BlogPosting');
+    }
+
+    public function test_category_page_includes_collection_schema(): void
+    {
+        $this->get('/network-switches/8-port-poe-switches')
+            ->assertOk()
+            ->assertSee('CollectionPage');
+    }
+
+    public function test_utility_pages_are_noindexed(): void
+    {
+        $this->get('/switch-finder')->assertOk()->assertSee('noindex,follow');
+        $this->get('/compare')->assertOk()->assertSee('noindex,follow');
+    }
+
+    public function test_sitemap_excludes_utility_finder(): void
+    {
+        $this->get('/sitemap.xml')->assertOk()->assertDontSee('/switch-finder');
+    }
+
     public function test_sitemap_returns_xml(): void
     {
         $response = $this->get('/sitemap.xml');

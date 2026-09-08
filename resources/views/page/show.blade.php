@@ -8,15 +8,18 @@
         : route('home');
     $pageCanonicalUrl = \App\Support\SeoMetadata::canonicalOverride($page)
         ?: \App\Support\CanonicalUrl::route('pages.show', $page);
-    $fullPageTitle = \Illuminate\Support\Str::contains($articleTitle, config('app.name', 'Mikrotik Kenya'))
+    $fullPageTitle = \Illuminate\Support\Str::contains($articleTitle, config('app.name', 'Network Switches Kenya'))
         ? $articleTitle
-        : $articleTitle . ' | ' . config('app.name', 'Mikrotik Kenya');
+        : $articleTitle . ' | ' . config('app.name', 'Network Switches Kenya');
     $breadcrumbSchema = \App\Support\StructuredData::breadcrumbs([
         ['name' => 'Home', 'url' => \App\Support\CanonicalUrl::route('home')],
         ['name' => $page->title, 'url' => $pageCanonicalUrl],
     ]);
     $pageFaqItems = is_array($page->faq_items) ? $page->faq_items : [];
     $faqSchema = \App\Support\StructuredData::faq($pageFaqItems);
+    $articleSchema = $page->type === 'post'
+        ? \App\Support\StructuredData::article($page, $pageCanonicalUrl, $pageMetaDescription, $page->image_url)
+        : null;
 @endphp
 
 @section('title', $fullPageTitle)
@@ -36,6 +39,9 @@
     <script type="application/ld+json">@json($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @if($faqSchema)
         <script type="application/ld+json">@json($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
+    @endif
+    @if($articleSchema)
+        <script type="application/ld+json">@json($articleSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     @endif
 @endpush
 

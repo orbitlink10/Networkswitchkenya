@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Mikrotik Kenya')
+@section('title', 'Create Account | '.config('app.name', 'Network Switches Kenya'))
+@section('robots', 'noindex,follow')
 
 @section('content')
 <section class="panel auth-card">

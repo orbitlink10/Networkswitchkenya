@@ -11,6 +11,7 @@
 @section('canonical_url', \App\Support\CanonicalUrl::route('finder'))
 @section('og_title', 'Network Switch Finder')
 @section('og_description', $description)
+@section('robots', 'noindex,follow')
 
 @section('content')
 <section class="finder-page">

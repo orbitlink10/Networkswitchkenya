@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
+@php
+    $currentPage = $posts->currentPage();
+    $canonicalQuery = $currentPage > 1 ? ['page' => $currentPage] : [];
+    $canonicalUrl = \App\Support\CanonicalUrl::route('blog.index', [], $canonicalQuery);
+@endphp
+
 @section('title', $title)
 @section('meta_description', $description)
-@section('canonical_url', \App\Support\CanonicalUrl::route('blog.index'))
+@section('canonical_url', $canonicalUrl)
 @section('og_title', $title)
 @section('og_description', $description)
 

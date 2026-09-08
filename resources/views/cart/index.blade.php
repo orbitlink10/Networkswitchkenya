@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('title', 'Your Cart | '.config('app.name', 'Network Switches Kenya'))
+@section('robots', 'noindex,follow')
+
 @section('content')
 <section class="panel">
     <h1>Your Cart</h1>

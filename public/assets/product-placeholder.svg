@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-labelledby="title desc">
-  <title id="title">MikroTik Kenya product image placeholder</title>
+  <title id="title">Network Switches Kenya product image placeholder</title>
   <desc id="desc">A simple network device illustration used when a product image is unavailable.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
@@ -32,6 +32,6 @@
     <path d="M166 112V82"/>
     <path d="M314 112V82"/>
   </g>
-  <text x="240" y="284" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#0f172a">MikroTik Kenya</text>
+  <text x="240" y="284" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Network Switches Kenya</text>
   <text x="240" y="314" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#64748b">Image coming soon</text>
 </svg>
