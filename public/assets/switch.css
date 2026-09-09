@@ -809,13 +809,7 @@
     }
 }
 
-/* Product card add-to-cart */
-.product-add-cart-form {
-    display: inline-flex;
-    flex: 1;
-    min-width: 0;
-}
-
+/* Full-width product card action */
 .product-card-actions .view-btn {
     max-width: none;
     width: 100%;

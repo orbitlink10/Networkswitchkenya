@@ -54,12 +54,6 @@
             </div>
         </div>
         <div class="product-card-actions">
-            <form method="post" action="{{ route('cart.add', $product) }}" class="product-compare-form product-add-cart-form">
-                @csrf
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="redirect" value="back">
-                <button type="submit" class="view-btn">Add to Cart</button>
-            </form>
             <a class="view-btn" href="{{ route('product.show', $product) }}" title="View {{ $productDisplayName }}">View Product</a>
         </div>
     </div>
