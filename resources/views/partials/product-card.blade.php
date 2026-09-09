@@ -60,10 +60,7 @@
                 <input type="hidden" name="redirect" value="back">
                 <button type="submit" class="view-btn">Add to Cart</button>
             </form>
-            <form method="post" action="{{ route('comparison.add', $product) }}" class="product-compare-form">
-                @csrf
-                <button type="submit" class="product-compare-btn" title="Add to compare">Compare</button>
-            </form>
+            <a class="view-btn" href="{{ route('product.show', $product) }}" title="View {{ $productDisplayName }}">View Product</a>
         </div>
     </div>
 </article>
