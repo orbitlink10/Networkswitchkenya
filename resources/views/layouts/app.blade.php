@@ -9,6 +9,7 @@
         $pageTitle = trim($__env->yieldContent('title')) ?: config('app.name', 'Network Switches Kenya');
         $pageDescription = trim($__env->yieldContent('meta_description')) ?: 'Shop PoE, managed, unmanaged, gigabit and fiber network switches in Kenya.';
         $marketCssVersion = @filemtime(public_path('assets/market.css')) ?: time();
+        $switchCssVersion = @filemtime(public_path('assets/switch.css')) ?: time();
         $canonicalUrl = trim($__env->yieldContent('canonical_url'));
         $robotsContent = trim($__env->yieldContent('robots'));
         $openGraphTitle = trim($__env->yieldContent('og_title')) ?: $pageTitle;
@@ -46,7 +47,7 @@
     <script type="application/ld+json">@json($organizationSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     <script type="application/ld+json">@json($websiteSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)</script>
     <link rel="stylesheet" href="{{ asset('assets/market.css') }}?v={{ $marketCssVersion }}">
-    <link rel="stylesheet" href="{{ asset('assets/switch.css') }}?v={{ $marketCssVersion }}">
+    <link rel="stylesheet" href="{{ asset('assets/switch.css') }}?v={{ $switchCssVersion }}">
     @stack('head')
 </head>
 <body>

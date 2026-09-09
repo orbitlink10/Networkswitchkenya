@@ -25,6 +25,7 @@
         @endif
     >
         <div class="hero-banner-inner">
+            <div class="hero-copy">
             <p class="hero-kicker">Kenya's Specialist Network Switch Store</p>
             <h1>{{ $homepageContent->hero_title }}</h1>
             <p>{{ $homepageContent->hero_description }}</p>
@@ -37,6 +38,17 @@
             <div class="hero-actions">
                 <a class="hero-cta hero-cta--primary" href="{{ \App\Support\SwitchCatalog::categoryUrl('network-switches') }}">Shop Network Switches</a>
                 <a class="hero-cta hero-cta--secondary" href="{{ route('finder') }}">Find My Switch</a>
+            </div>
+            </div>
+            <div class="hero-product-gallery" aria-label="Explore network switches">
+                <a class="hero-product-tile" href="{{ \App\Support\SwitchCatalog::categoryUrl('poe-switches') }}">
+                    <img src="{{ asset('images/products/mikrotik/mikrotik-crs328-24p-4srm-network-switch.webp') }}" alt="MikroTik CRS328 rackmount PoE network switch" width="480" height="260" fetchpriority="high">
+                    <span>PoE Network Switches &rarr;</span>
+                </a>
+                <a class="hero-product-tile" href="{{ \App\Support\SwitchCatalog::categoryUrl('network-switches') }}">
+                    <img src="{{ asset('images/products/tp-link/tp-link-tl-sg108-network-switch.webp') }}" alt="TP-Link TL-SG108 desktop network switch" width="480" height="260" decoding="async">
+                    <span>Shop Network Switches &rarr;</span>
+                </a>
             </div>
         </div>
     </section>
