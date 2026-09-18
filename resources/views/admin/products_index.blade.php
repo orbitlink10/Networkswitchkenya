@@ -76,6 +76,22 @@
                     </tbody>
                 </table>
             </div>
+
+            @if($products->hasPages())
+                <nav class="pager" aria-label="Product pagination">
+                    @if($products->onFirstPage())
+                        <span class="pager-link disabled" aria-disabled="true">Previous</span>
+                    @else
+                        <a class="pager-link" href="{{ $products->previousPageUrl() }}" rel="prev">Previous</a>
+                    @endif
+                    <span>Page {{ $products->currentPage() }} of {{ $products->lastPage() }}</span>
+                    @if($products->hasMorePages())
+                        <a class="pager-link" href="{{ $products->nextPageUrl() }}" rel="next">Next</a>
+                    @else
+                        <span class="pager-link disabled" aria-disabled="true">Next</span>
+                    @endif
+                </nav>
+            @endif
         </section>
     </div>
 </div>

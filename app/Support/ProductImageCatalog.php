@@ -267,6 +267,11 @@ class ProductImageCatalog
             }
         }
 
+        $bundled = config('product_images.' . $productSlug . '.path');
+        if (is_string($bundled) && is_file(public_path($bundled))) {
+            return self::publicPathUrl($bundled);
+        }
+
         return null;
     }
 

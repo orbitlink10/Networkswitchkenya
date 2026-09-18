@@ -693,6 +693,7 @@ class AdminController extends Controller
                 });
             })
             ->latest()
+            ->orderByDesc('id')
             ->paginate(20)
             ->withQueryString();
 

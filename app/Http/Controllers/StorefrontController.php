@@ -122,6 +122,7 @@ class StorefrontController extends Controller
             ->where('type', 'post')
             ->when($category !== '' && isset($categories[$category]), fn ($query) => $query->where('category', $category))
             ->latest()
+            ->orderByDesc('id')
             ->paginate(12)
             ->withQueryString();
 
@@ -286,7 +287,7 @@ class StorefrontController extends Controller
                 ->get();
         }
 
-        $blogPosts = Page::query()->where('type', 'post')->latest()->limit(3)->get();
+        $blogPosts = Page::query()->where('type', 'post')->latest()->orderByDesc('id')->limit(3)->get();
 
         return view('home', [
             'homepageContent' => $homepageContent,
