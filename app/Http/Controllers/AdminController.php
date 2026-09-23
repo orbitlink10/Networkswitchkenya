@@ -464,14 +464,22 @@ class AdminController extends Controller
             ->get();
 
         $adminProducts = $adminVendor
-            ? $adminVendor->products()->with('category')->latest()->limit(12)->get()
-            : collect();
+            ? $adminVendor->products()->with('category')->latest()->paginate(20)->withQueryString()
+            : new LengthAwarePaginator([], 0, 20);
+
+        $recentPosts = Page::query()
+            ->where('type', 'post')
+            ->latest()
+            ->orderByDesc('id')
+            ->paginate(20, ['*'], 'posts_page')
+            ->withQueryString();
 
         return view('admin.dashboard', [
             'stats' => $stats,
             'recentOrders' => $recentOrders,
             'pendingVendors' => $pendingVendors,
             'adminProducts' => $adminProducts,
+            'recentPosts' => $recentPosts,
         ]);
     }
 

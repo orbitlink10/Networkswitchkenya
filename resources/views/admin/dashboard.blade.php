@@ -242,6 +242,74 @@
                                 </tbody>
                             </table>
                         </div>
+                        @if($adminProducts->hasPages())
+                            <nav class="pager" aria-label="Product pagination">
+                                @if($adminProducts->onFirstPage())
+                                    <span class="pager-link disabled" aria-disabled="true">Previous</span>
+                                @else
+                                    <a class="pager-link" href="{{ $adminProducts->previousPageUrl() }}" rel="prev">Previous</a>
+                                @endif
+                                <span>Page {{ $adminProducts->currentPage() }} of {{ $adminProducts->lastPage() }}</span>
+                                @if($adminProducts->hasMorePages())
+                                    <a class="pager-link" href="{{ $adminProducts->nextPageUrl() }}" rel="next">Next</a>
+                                @else
+                                    <span class="pager-link disabled" aria-disabled="true">Next</span>
+                                @endif
+                            </nav>
+                        @endif
+                    @endif
+                </section>
+
+                <section class="panel admin-section-card" id="admin-articles">
+                    <div class="admin-section-head">
+                        <div>
+                            <p class="admin-section-kicker">Blog</p>
+                            <h2>Recent Articles</h2>
+                        </div>
+                        <span class="admin-section-meta">Latest posts</span>
+                    </div>
+                    @if($recentPosts->isEmpty())
+                        <p class="empty">No articles published yet.</p>
+                    @else
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Type</th>
+                                    <th>Published</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($recentPosts as $post)
+                                    <tr>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ ucfirst($post->type) }}</td>
+                                        <td>{{ $post->created_at?->format('d/m/Y') }}</td>
+                                        <td>
+                                            <a class="admin-outline-action tone-info" href="{{ route('pages.show', ['page' => $post->slug]) }}" target="_blank" rel="noopener noreferrer">View</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        @if($recentPosts->hasPages())
+                            <nav class="pager" aria-label="Article pagination">
+                                @if($recentPosts->onFirstPage())
+                                    <span class="pager-link disabled" aria-disabled="true">Previous</span>
+                                @else
+                                    <a class="pager-link" href="{{ $recentPosts->previousPageUrl() }}" rel="prev">Previous</a>
+                                @endif
+                                <span>Page {{ $recentPosts->currentPage() }} of {{ $recentPosts->lastPage() }}</span>
+                                @if($recentPosts->hasMorePages())
+                                    <a class="pager-link" href="{{ $recentPosts->nextPageUrl() }}" rel="next">Next</a>
+                                @else
+                                    <span class="pager-link disabled" aria-disabled="true">Next</span>
+                                @endif
+                            </nav>
+                        @endif
                     @endif
                 </section>
             </div>
